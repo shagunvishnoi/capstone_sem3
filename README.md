@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FitFusion - AP Capstone Project
 
 ## Project Proposal
@@ -40,3 +41,6 @@
     ```
 4.  **Environment Variables:**
     -   Create `server/.env` with `MONGO_URI` and `JWT_SECRET`.
+=======
+# FitFusion
+>>>>>>> b083d9f134ba187cd4a16814a9b8145e7fe9b69f
