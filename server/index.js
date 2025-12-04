@@ -12,7 +12,7 @@ if (missingEnvVars.length > 0) {
     });
     console.error('\nPlease check your .env file in the server directory.');
     console.error('Required variables:');
-    console.error('   MONGO_URI=mongodb:
+    console.error('   MONGO_URI=mongodb://localhost:27017/fitfusion');
     console.error('   JWT_SECRET=your-secret-key-here');
     process.exit(1);
 }

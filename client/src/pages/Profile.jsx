@@ -124,9 +124,11 @@ const Profile = () => {
                         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30">
                             {imagePreview ? (
                                 <img
-                                    src={imagePreview.startsWith('data:') || imagePreview.startsWith('http')
-                                        ? imagePreview
-                                        : `http:
+                                    src={
+                                        imagePreview.startsWith('data:') || imagePreview.startsWith('http')
+                                            ? imagePreview
+                                            : `http://localhost:5000${imagePreview}`
+                                    }
                                     alt="Profile"
                                     className="w-full h-full object-cover"
                                 />
@@ -137,10 +139,26 @@ const Profile = () => {
                             )}
                         </div>
                         {isEditing && (
-                            <div className="w-full">
+                            <div className="w-full space-y-3">
                                 <input
                                     type="file"
-                                    accept="image}
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className="w-full text-sm text-text-muted"
+                                />
+                                <motion.button
+                                    type="button"
+                                    onClick={handleImageUpload}
+                                    className="btn btn-outline w-full"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    Upload Picture
+                                </motion.button>
+                            </div>
+                        )}
+                    </div>
+                </motion.div>
                 <div className="lg:col-span-2 space-y-6">
                     <motion.div
                         className="glass-card p-6"
@@ -201,10 +219,15 @@ const Profile = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-text-muted mb-2">Role</label>
-                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${profile.role === 'admin' ? 'bg-primary/20 text-primary' :
-                                        profile.role === 'trainer' ? 'bg-accent/20 text-accent' :
-                                            'bg-secondary/20 text-secondary'
-                                    }`}>
+                                <span
+                                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                                        profile.role === 'admin'
+                                            ? 'bg-primary/20 text-primary'
+                                            : profile.role === 'trainer'
+                                            ? 'bg-accent/20 text-accent'
+                                            : 'bg-secondary/20 text-secondary'
+                                    }`}
+                                >
                                     {profile.role}
                                 </span>
                             </div>

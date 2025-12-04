@@ -86,8 +86,12 @@ const TrainerDirectory = () => {
                                 <div className="flex items-start gap-4 mb-4">
                                     <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/30 flex-shrink-0">
                                         {trainer.profilePicture ? (
-                                            <img 
-                                                src={trainer.profilePicture.includes('http') ? trainer.profilePicture : `http:
+                                            <img
+                                                src={
+                                                    trainer.profilePicture.includes('http')
+                                                        ? trainer.profilePicture
+                                                        : `http://localhost:5000${trainer.profilePicture}`
+                                                }
                                                 alt={trainer.name}
                                                 className="w-full h-full object-cover"
                                             />
@@ -253,12 +257,22 @@ const TrainerDirectory = () => {
                                         {selectedTrainer.trainerInfo?.socialMedia && (
                                             <div className="flex gap-4 mt-4">
                                                 {selectedTrainer.trainerInfo.socialMedia.instagram && (
-                                                    <a href={`https:
+                                                    <a
+                                                        href={`https://instagram.com/${selectedTrainer.trainerInfo.socialMedia.instagram.replace('@', '')}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-accent hover:underline"
+                                                    >
                                                         Instagram
                                                     </a>
                                                 )}
                                                 {selectedTrainer.trainerInfo.socialMedia.website && (
-                                                    <a href={selectedTrainer.trainerInfo.socialMedia.website} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                                                    <a
+                                                        href={selectedTrainer.trainerInfo.socialMedia.website}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-accent hover:underline"
+                                                    >
                                                         Website
                                                     </a>
                                                 )}
