@@ -13,8 +13,8 @@ if (missingEnvVars.length > 0) {
     });
     console.error('\nPlease check your .env file in the server directory.');
     console.error('Required variables:');
-    console.error('   MONGO_URI=mongodb://localhost:27017/workfit');
-    console.error('   JWT_SECRET=your-secret-key-here');
+    console.error('MONGO_URI=mongodb://localhost:27017/ignitefit');
+    console.error('JWT_SECRET=your-secret-key-here');
     process.exit(1);
 }
 
@@ -37,7 +37,7 @@ app.use('/api/exercises', require('./routes/exerciseRoutes'));
 app.use('/api/templates', require('./routes/workoutTemplateRoutes'));
 app.use('/api/diet', require('./routes/dietRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
-app.get('/', (req, res) => res.send('WorkFit API Running'));
+app.get('/', (req, res) => res.send('IgniteFit API Running'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

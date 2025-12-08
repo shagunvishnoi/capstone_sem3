@@ -46,7 +46,7 @@ const Register = () => {
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-accent/20 blur-[60px] rounded-full pointer-events-none" />
 
                 <div className="text-center mb-8 relative z-10">
-                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-2">Join WorkFit</h2>
+                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-2">Join IgniteFit</h2>
                     <p className="text-text-muted">Start your journey today</p>
                 </div>
 

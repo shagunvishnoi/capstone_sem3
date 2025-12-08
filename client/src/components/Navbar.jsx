@@ -52,13 +52,13 @@ const Navbar = () => {
                         <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                         <motion.img
                             src={logo}
-                            alt="WorkFit"
+                            alt="IgniteFit"
                             className="w-10 h-10 object-contain relative"
                             whileHover={{ rotate: 10, scale: 1.1 }}
                         />
                     </div>
                     <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                        WorkFit
+                        IgniteFit
                     </span>
                 </Link>
 

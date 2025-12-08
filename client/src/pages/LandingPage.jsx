@@ -66,7 +66,7 @@ const LandingPage = () => {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
-                            v2.0 is now live
+                            IgniteFit is live
                         </span>
                     </motion.div>
 
@@ -141,7 +141,7 @@ const LandingPage = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                             >
-                                <h3 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50 mb-2">
+                                <h3 className="text-4xl md:text-5xl font-bold text-blue-900 mb-2">
                                     {stat.number}
                                 </h3>
                                 <p className="text-text-muted font-medium">{stat.label}</p>
@@ -161,7 +161,7 @@ const LandingPage = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                         >
-                            Why Choose <span className="text-primary">WorkFit?</span>
+                            Why Choose <span className="text-primary">IgniteFit?</span>
                         </motion.h2>
                         <p className="text-xl text-text-muted max-w-2xl mx-auto">
                             Built with precision for those who demand excellence in their training tools.
@@ -181,7 +181,7 @@ const LandingPage = () => {
                                 <div className={`w-14 h-14 rounded-2xl bg-surface-highlight flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${feature.color}`}>
                                     <feature.icon className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
+                                <h3 className="text-xl font-bold mb-3 text-blue-500">
                                     {feature.title}
                                 </h3>
                                 <p className="text-text-muted leading-relaxed">
@@ -201,7 +201,7 @@ const LandingPage = () => {
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold mb-4">Advanced Analytics</h3>
                                 <p className="text-text-muted max-w-md mb-6">Visualize your progress with interactive charts, heatmaps, and trend analysis. Understand your body better than ever before.</p>
-                                <Button variant="secondary" className="group">Explore Analytics <TrendingUp className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></Button>
+                                <Button variant="secondary" className="group bg-blue-100 !text-blue-900 hover:bg-blue-200">Explore Analytics <TrendingUp className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></Button>
                             </div>
                             <div className="absolute right-[-20px] bottom-[-20px] opacity-10 group-hover:opacity-20 transition-opacity">
                                 <BarChart2 className="w-64 h-64" />
@@ -231,7 +231,7 @@ const LandingPage = () => {
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold mb-4">Community Driven</h3>
                                 <p className="text-text-muted max-w-md mb-6">Join a community of like-minded individuals. Share templates, get feedback, and grow together.</p>
-                                <Button variant="secondary" className="group">Join Community <Users className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></Button>
+                                <Button variant="secondary" className="group bg-blue-100 !text-blue-900 hover:bg-blue-200">Join Community <Users className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></Button>
                             </div>
                             <div className="absolute right-[-20px] bottom-[-20px] opacity-10 group-hover:opacity-20 transition-opacity">
                                 <Activity className="w-64 h-64" />
@@ -254,10 +254,12 @@ const LandingPage = () => {
 
                         <div className="relative z-10">
                             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-                                Ready to Transform?
+                                <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+                                    Ready to Transform?
+                                </span>
                             </h2>
                             <p className="text-xl text-text-muted mb-10 max-w-2xl mx-auto">
-                                Join thousands of elite athletes who trust WorkFit for their daily training.
+                                Join thousands of elite athletes who trust IgniteFit for their daily training.
                             </p>
                             {!user && (
                                 <Link to="/register">
@@ -277,11 +279,11 @@ const LandingPage = () => {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                         <div className="flex items-center gap-2">
                             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                                WorkFit
+                                IgniteFit
                             </span>
                         </div>
                         <p className="text-text-muted text-sm">
-                            &copy; {new Date().getFullYear()} WorkFit. All rights reserved.
+                            &copy; {new Date().getFullYear()} IgniteFit. All rights reserved.
                         </p>
                     </div>
                 </div>

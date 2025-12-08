@@ -1,8 +1,8 @@
-WorkFit - AP Capstone Project
+IgniteFit - AP Capstone Project
 
 Project Proposal
 
-1. Student Name: Anshu Yadav and Project Name: WorkFit
+1. Student Name: Shagun Vishnoi and Project Name: IgniteFit
 
 2. Problem Statement: Despite growing interest in personal fitness, many users lack an easy way to track and evaluate their workouts over time. Current solutions are either too complex or too expensive, highlighting the need for a simple, elegant platform that centralizes workout logging, progress tracking, and exercise planning.
 

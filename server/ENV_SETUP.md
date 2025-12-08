@@ -13,7 +13,7 @@ MONGO_URI=mongodb://localhost:27017/fitfusion
 
 For **MongoDB Atlas** (cloud):
 ```
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/fitfusion
+MONGO_URI=mongodb+srv://shagun_vishnoi:shagunvishnoi@cluster0.eafeo8i.mongodb.net/?appName=Cluster0
 ```
 
 ### JWT Secret (JWT_SECRET)
@@ -38,26 +38,9 @@ PORT=5000
 ## Example .env File
 
 ```env
-MONGO_URI=mongodb://localhost:27017/fitfusion
+MONGO_URI=mongodb+srv://shagun_vishnoi:shagunvishnoi@cluster0.eafeo8i.mongodb.net/?appName=Cluster0
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
 PORT=5000
 ```
-
-## Troubleshooting
-
-1. **Database Connection Failed**
-   - Make sure MongoDB is running on your system
-   - Check that the connection string matches your MongoDB setup
-   - For MongoDB Compass, ensure the database name matches
-
-2. **Registration/Login Fails**
-   - Verify MONGO_URI is correct
-   - Ensure JWT_SECRET is set
-   - Check server console for detailed error messages
-
-3. **Server Won't Start**
-   - Check that all required environment variables are set
-   - Verify the .env file is in the `server` directory
-   - Ensure MongoDB is running before starting the server
 
 
