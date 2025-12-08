@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'http://localhost:5001/api',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -19,11 +19,11 @@ api.interceptors.request.use(
         if (token) {
             config.headers['x-auth-token'] = token;
         }
-        
+
         if (config.data instanceof FormData) {
             delete config.headers['Content-Type'];
         }
-        
+
         if (config.method !== 'get' && loaderCallbacks) {
             loaderCallbacks.showLoader('Processing...');
         }

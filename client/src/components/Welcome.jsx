@@ -7,7 +7,7 @@ const Welcome = ({ onComplete }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setShow(false);
-            setTimeout(onComplete, 1000); 
+            setTimeout(onComplete, 1000);
         }, 3000);
         return () => clearTimeout(timer);
     }, [onComplete]);
@@ -37,7 +37,7 @@ const Welcome = ({ onComplete }) => {
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.5 }}
                         >
-                            FitFusion
+                            WorkFit
                         </motion.h1>
 
                         <motion.p

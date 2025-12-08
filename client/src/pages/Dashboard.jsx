@@ -1,9 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import AuthContext from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLoader } from '../context/LoaderContext';
+import Button from '../components/Button';
+import {
+    Plus,
+    Search,
+    Filter,
+    Calendar,
+    Clock,
+    Trash2,
+    ChevronLeft,
+    ChevronRight,
+    Dumbbell,
+    Edit2,
+    Eye
+} from 'lucide-react';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
@@ -14,11 +28,12 @@ const Dashboard = () => {
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('-date');
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const fetchWorkouts = async () => {
         setLoading(true);
         try {
-            const res = await api.get(`/workouts?page=${page}&limit=5&search=${search}&sort=${sort}`);
+            const res = await api.get(`/workouts?page=${page}&limit=6&search=${search}&sort=${sort}`);
             setWorkouts(res.data.workouts);
             setTotalPages(res.data.totalPages);
         } catch (err) {
@@ -47,134 +62,165 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
-                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">My Workouts</h2>
-                <Link to="/workouts/new">
-                    <motion.button
-                        className="btn btn-primary"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+        <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+                <div>
+                    <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-2">
+                        My Workouts
+                    </h2>
+                    <p className="text-text-muted">Track your progress and manage your training sessions.</p>
+                </div>
+                <Button icon={Plus} className="shadow-lg shadow-primary/20" onClick={() => navigate('/workouts/new')}>
+                    Add Workout
+                </Button>
+            </div>
+
+            {/* Filters */}
+            <div className="glass-card p-4 mb-8 flex flex-col md:flex-row gap-4 items-center">
+                <div className="relative flex-1 w-full">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                    <input
+                        type="text"
+                        placeholder="Search workouts..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="pl-11 bg-surface-highlight/50 border-transparent focus:bg-surface-highlight"
+                    />
+                </div>
+                <div className="flex items-center gap-2 w-full md:w-auto">
+                    <Filter className="w-5 h-5 text-text-muted hidden md:block" />
+                    <select
+                        value={sort}
+                        onChange={(e) => setSort(e.target.value)}
+                        className="bg-surface-highlight/50 border-transparent focus:bg-surface-highlight w-full md:w-56"
                     >
-                        + Add Workout
-                    </motion.button>
-                </Link>
+                        <option value="-date">Newest First</option>
+                        <option value="date">Oldest First</option>
+                        <option value="duration">Duration (Shortest)</option>
+                        <option value="-duration">Duration (Longest)</option>
+                    </select>
+                </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-                <input
-                    type="text"
-                    placeholder="Search workouts..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="flex-1 bg-surface/50 border border-glass-border rounded-xl p-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                />
-                <select
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                    className="bg-surface/50 border border-glass-border rounded-xl p-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all md:w-48"
-                >
-                    <option value="-date">Newest First</option>
-                    <option value="date">Oldest First</option>
-                    <option value="duration">Duration (Asc)</option>
-                    <option value="-duration">Duration (Desc)</option>
-                </select>
-            </div>
-
-            <div className="grid gap-4">
-                <AnimatePresence>
-                    {workouts.map((workout, index) => (
-                        <motion.div
-                            key={workout._id}
-                            className="glass-card p-6 flex flex-col md:flex-row justify-between items-center gap-4"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ scale: 1.01, borderColor: 'var(--primary)' }}
-                        >
-                            <div>
-                                <h3 className="text-xl font-bold text-primary mb-1">{workout.title}</h3>
-                                <p className="text-text-muted text-sm">
-                                    {new Date(workout.date).toLocaleDateString()} • <span className="text-secondary font-semibold">{workout.duration} mins</span>
-                                </p>
-                            </div>
-                            <div className="flex gap-3">
-                                <Link to={`/workouts/${workout._id}`}>
-                                    <motion.button
-                                        className="btn btn-outline text-sm py-2"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        View
-                                    </motion.button>
-                                </Link>
-                                <Link to={`/workouts/edit/${workout._id}`}>
-                                    <motion.button
-                                        className="btn btn-outline text-sm py-2"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        Edit
-                                    </motion.button>
-                                </Link>
-                                <motion.button
-                                    onClick={() => handleDelete(workout._id)}
-                                    className="btn bg-red-500/10 text-red-400 border border-red-500/50 hover:bg-red-500/20 text-sm py-2"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
+            {/* Content */}
+            <div className="min-h-[400px]">
+                {loading && workouts.length === 0 ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[1, 2, 3].map((n) => (
+                            <div key={n} className="glass-card h-48 animate-pulse bg-surface-highlight/20" />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <AnimatePresence mode='popLayout'>
+                            {workouts.map((workout, index) => (
+                                <motion.div
+                                    key={workout._id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="glass-card group hover:border-primary/50 flex flex-col h-full"
                                 >
-                                    Delete
-                                </motion.button>
-                            </div>
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
+                                    <div className="p-6 flex-1">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                                <Dumbbell className="w-6 h-6" />
+                                            </div>
+                                            <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                                                <button
+                                                    onClick={() => handleDelete(workout._id)}
+                                                    className="p-1.5 hover:bg-red-500/10 text-text-muted hover:text-red-400 rounded-lg transition-colors"
+                                                    title="Delete"
+                                                >
+                                                    <Trash2 className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        </div>
 
-                {loading && workouts.length === 0 && (
-                    <div className="text-center py-12">
-                        <div className="inline-block w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                                        <h3 className="text-xl font-bold mb-3 line-clamp-1" title={workout.title}>
+                                            {workout.title}
+                                        </h3>
+
+                                        <div className="flex flex-col gap-2 text-sm text-text-muted">
+                                            <div className="flex items-center gap-2">
+                                                <Calendar className="w-4 h-4" />
+                                                {new Date(workout.date).toLocaleDateString(undefined, {
+                                                    weekday: 'short',
+                                                    year: 'numeric',
+                                                    month: 'short',
+                                                    day: 'numeric'
+                                                })}
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Clock className="w-4 h-4" />
+                                                <span className="text-secondary font-medium">{workout.duration} mins</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="p-4 border-t border-glass-border bg-surface-highlight/20 flex gap-3">
+                                        <Link to={`/workouts/${workout._id}`} className="flex-1">
+                                            <Button variant="secondary" size="sm" className="w-full text-xs">
+                                                <Eye className="w-3.5 h-3.5 mr-2" /> View
+                                            </Button>
+                                        </Link>
+                                        <Link to={`/workouts/edit/${workout._id}`} className="flex-1">
+                                            <Button variant="outline" size="sm" className="w-full text-xs border-glass-border hover:border-primary/50">
+                                                <Edit2 className="w-3.5 h-3.5 mr-2" /> Edit
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
                     </div>
                 )}
 
                 {!loading && workouts.length === 0 && (
                     <motion.div
-                        className="text-center py-12 text-text-muted glass-card p-8"
+                        className="text-center py-20 glass-card"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                     >
-                        <div className="text-6xl mb-4">💪</div>
-                        <p className="text-xl">No workouts found. Start your journey by adding one!</p>
-                        <Link to="/workouts/new">
-                            <motion.button
-                                className="btn btn-primary mt-6"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                Create Your First Workout
-                            </motion.button>
-                        </Link>
+                        <div className="w-20 h-20 bg-surface-highlight rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+                            💪
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">No workouts found</h3>
+                        <p className="text-text-muted mb-8 max-w-sm mx-auto">
+                            It looks like you haven't tracked any workouts yet. Start your journey today!
+                        </p>
+                        <Button size="lg" icon={Plus} onClick={() => navigate('/workouts/new')}>
+                            Create First Workout
+                        </Button>
                     </motion.div>
                 )}
             </div>
 
+            {/* Pagination */}
             {totalPages > 1 && (
-                <div className="mt-8 flex justify-center gap-4 items-center">
-                    <button
+                <div className="mt-10 flex justify-center gap-4 items-center">
+                    <Button
+                        variant="ghost"
                         disabled={page === 1}
                         onClick={() => setPage(page - 1)}
-                        className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="disabled:opacity-30"
                     >
-                        Prev
-                    </button>
-                    <span className="text-text-muted">Page {page} of {totalPages}</span>
-                    <button
+                        <ChevronLeft className="w-5 h-5 mr-1" /> Prev
+                    </Button>
+                    <span className="text-sm font-medium px-4 py-2 bg-surface-highlight rounded-lg">
+                        {page} <span className="text-text-muted">/</span> {totalPages}
+                    </span>
+                    <Button
+                        variant="ghost"
                         disabled={page === totalPages}
                         onClick={() => setPage(page + 1)}
-                        className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="disabled:opacity-30"
                     >
-                        Next
-                    </button>
+                        Next <ChevronRight className="w-5 h-5 ml-1" />
+                    </Button>
                 </div>
             )}
         </div>
