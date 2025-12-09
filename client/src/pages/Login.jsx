@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../components/Button';
-import { Mail, Lock, AlertCircle, ArrowRight, Loader2 } from 'lucide-react';
+import { Mail, Lock, AlertCircle, ArrowRight, Loader2, ArrowLeft } from 'lucide-react';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -41,6 +41,13 @@ const Login = () => {
                 {/* Decorative background blur */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full pointer-events-none" />
+
+                <div className="mb-6 relative z-10">
+                    <Link to="/" className="inline-flex items-center text-text-muted hover:text-primary transition-colors group">
+                        <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                        Back to Home
+                    </Link>
+                </div>
 
                 <div className="text-center mb-8 relative z-10">
                     <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">Welcome Back</h2>

@@ -4,6 +4,7 @@ import { useContext, useRef } from 'react';
 import AuthContext from '../context/AuthContext';
 import Button from '../components/Button';
 import { Activity, BarChart2, Target, Smartphone, ChevronRight, CheckCircle2, TrendingUp, Shield, Zap } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const LandingPage = () => {
     const { user } = useContext(AuthContext);
@@ -51,6 +52,24 @@ const LandingPage = () => {
 
     return (
         <div ref={containerRef} className="min-h-screen bg-background text-text overflow-hidden relative selection:bg-primary selection:text-white">
+
+            {/* Top Left Logo */}
+            <div className="absolute top-6 left-6 z-50">
+                <Link to="/" className="flex items-center gap-3 group">
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <motion.img
+                            src={logo}
+                            alt="IgniteFit"
+                            className="w-10 h-10 object-contain relative"
+                            whileHover={{ rotate: 10, scale: 1.1 }}
+                        />
+                    </div>
+                    <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        IgniteFit
+                    </span>
+                </Link>
+            </div>
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden">
